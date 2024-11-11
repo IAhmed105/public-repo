@@ -1,0 +1,83 @@
+
+
+# Intsall Docker
+
+$ sudo apt update
+
+
+Install a prerequisite package which allows apt to utilize HTTPS:
+$ sudo apt install apt-transport-https ca-certificates curl software-properties-common
+
+
+Add GPG key from the official Docker repo to the Ubuntu system:
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+
+Add the Docker repo to APT sources:
+$ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+
+
+Update the  database with the Docker packages from the added repo:
+$ sudo apt update
+
+
+Install Docker software:
+$ sudo apt install docker.io
+
+Docker should now be installed, the daemon started, and the process enabled to start on boot. To verify:
+$ sudo systemctl status docker
+$ sudo systemctl enable docker
+
+See Groups:
+$ groups
+
+add user to docker Groups:
+$ sudo usermod -aG docker ${USER}
+$ sudo usermod -aG docker ubuntu
+$ docker info
+
+
+####### Should restart the machine at this stage #######
+
+# Intsall kubectl
+
+Update your existing packages:
+$ sudo apt update
+
+Download kubectl binary:
+$ curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+
+Make the kubectl binary executable:
+$ chmod +x ./kubectl
+
+Move kubectl to /usr/local/bin/kubectl directory:
+$ sudo mv ./kubectl /usr/local/bin/kubectl
+
+To check the installed kubectl version on Ubuntu:
+$ kubectl version
+
+
+
+# Install minikube
+
+To install the latest minikube stable release on x86-64 Linux using binary download:
+
+$ curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+
+$ chmod +x minikube
+$ sudo mv minikube /usr/local/bin/
+
+$ minikube version
+
+
+to start minikube with docker:
+$ minikube start --driver=docker
+
+
+
+
+
+
+
+
+
